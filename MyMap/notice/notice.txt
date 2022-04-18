@@ -1,0 +1,69 @@
+<<spring-Boot 기본 설계>>
+
+1) 세션 레디스 (Session Redis), H2 or MySql : 세션관리 비정형, 정형_기본데이터 저장(Relation DataBase - RDB)
+
+2) spring boot web MVC : 웹설계 구현 로직	spring-boot-starter-web
+
+3) spring boot Session Redis : 레디스를 이용한 비정형 세션 관리
+								*제디스 Jedis -> 자바에서 레디스를 사용할 수 있는 라이브러리
+
+4) spring boot Security / spring boot OAuth2 : 회원 인증, 권한 관리
+
+5) spirng boot data Rest : Rest API
+
+6) spring boot BBatch : app를 만들면 버전관리, 백엔드 데이터 및 모듈관리를 주기적으로 관리.
+
+7) spring boot Data : JDBC, spring-JDBC, JPA(클래스로 테이블을 만드는) 등
+					 spring-boot-starter-data-jpa
+					 spring-boot-starter-data-rest
+					 spring-boot-starter-data-redis
+					 spring-boot-starter-aop
+					 spring-boot-starter-batch
+					 
+					 2년전
+					 JPA	-> Hibernate	-> dbserver
+					 
+					 최근
+					 h2		-> Mapper(Hibernate / mybatis)	-> / dbserver /
+					 Redis
+					 
+					 
+============================================================================
+
+디렉토리 구조
+	1) /src/main/java : 자바 소스 경로	
+	           		 com.test.controller.MyController
+	           		 com.test.service.MyService
+	           		 com.test.domain.Address
+									
+	
+	2) /src/main/resources
+				 -static : 정적페이지(css, img, js)의 기본 경로
+				 -templates : 서버사이드 템플릿 파일의 경로 thymeleaf, freemaker등
+				 application.properties : 포트, db연결객체, @Value		ex)segver.port:80  -> .으로 구분
+	 			 application.yml (YAML)			 ex) server:		-> 줄바꿈 + 들여쓰기로 구분
+	 			 										port :	80
+				 **** yml을 사용하려면 application.properties를 삭제하고 사용해야 한다. application.xxx은 하나밖에 못읽어
+					 application-{ }.yml { }안에 이름을 바꾸어 여러개의 yml을 사용가능
+	 			 										
+	3) /src/test/java : 테스트 경로
+	
+	4) mvnw(maven wrapper) : 배포환경에 mavenㅣ 설치되어 있지 않더라도 프로젝트를 빌드할 수 있도록 도와주는 도구,
+		 maven을 설치하지 않더라도 프로젝트에서 설정한 maven 버전으로 maven을 사용할 수 있다.
+		 
+	5) mvnw.cmd : maven wrapper를 사용해 build하는 명령어를 저장한 cmd 파일
+
+===========================================================================================
+@SpringBootApplication :  @Configuration, @EnableAutoConfiguration, @ComponentScan
+=================================================================================================	
+
+!!비동기 통신할 때 사용한다	
+Flux :  https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-config-validation	
+		https://projectreactor.io/docs/core/release/reference/index.html#which-operator
+		
+	
+	
+	
+	
+	
+	
