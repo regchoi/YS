@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+    <main class="main">
+      <div class="inner">
+        <form action="#" method="post">
+          <fieldset class="search">
+            <input
+              type="search"
+              class="search__text"
+              placeholder="메뉴를 검색하세요"
+            />
+            <button class="search__button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </fieldset>
+          <fieldset class="category">
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/All}'|">
+                <figure>
+                    <figcaption class="category__button__text">menu</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Kfood}'|">
+                <figure>
+                    <figcaption class="category__button__text">한식</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Jfood}'|">
+                <figure>
+                    <figcaption class="category__button__text">일식</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Cfood}'|">
+                <figure>
+                    <figcaption class="category__button__text">중식</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Wfood}'|">
+                <figure>
+                    <figcaption class="category__button__text">양식</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Chicken}'|">
+                <figure>
+                    <figcaption class="category__button__text">치킨</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Bunsik}'|">
+                <figure>
+                    <figcaption class="category__button__text">분식</figcaption>
+                </figure>
+            </button>
+            <button class="category__button" type="button" th:onclick="|location.href='@{/customer/eating_house/Dessert}'|">
+                <figure>
+                    <figcaption class="category__button__text">디저트</figcaption>
+                </figure>
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+
+</body>
+</html>

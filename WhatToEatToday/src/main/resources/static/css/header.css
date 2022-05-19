@@ -1,0 +1,47 @@
+.header {
+  background: #0a3d62;
+  height: 60px;
+}
+.header .inner {
+  max-width: 1400px;
+  margin: auto;
+}
+
+.logo__container {
+  float: left;
+  margin-top: 20px;
+}
+
+.header .logo {
+  font-size: var(--font-regular);
+  color: var(--bs-white);
+  font-family: "hanna2";
+  font-weight: bold;
+}
+
+.header .navbar {
+  float: right;
+  font-size: var(--font-regular);
+  padding-top: 20px;
+}
+
+.header .navbar ul li {
+  float: left;
+  font-family: "hanna2";
+  font-size: var(--font-regular);
+
+  width: 90px;
+  height: 40px;
+  border: 1px white;
+  border-radius: 20px;
+  background-color: #0a3d62;
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  margin-top: -10px;
+}
+
+.header .navbar ul li:hover {
+  background-color: white;
+  color: #0a3d62;
+}
