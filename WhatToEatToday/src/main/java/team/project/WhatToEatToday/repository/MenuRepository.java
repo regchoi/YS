@@ -54,6 +54,12 @@ public class MenuRepository {
                 .getResultList();
     }
 
+    public List<Menu> findCrossMenu(Long id){
+        return em.createQuery("SELECT m FROM Menu m where crossMenu.id = :id", Menu.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
 
     //List로 안받기
     public Menu findByCateId(Long id){
@@ -66,6 +72,12 @@ public class MenuRepository {
     public List<Menu> findByName(String name){
         return em.createQuery("select m from Menu m where m.name like concat('%', :name, '%')", Menu.class)
                 .setParameter("name", name)
+                .getResultList();
+    }
+
+    public List<Menu> findByConditionMenuId(Long id){
+        return em.createQuery("select m from Menu m where conditionMenu.id = :id", Menu.class)
+                .setParameter("id", id)
                 .getResultList();
     }
 

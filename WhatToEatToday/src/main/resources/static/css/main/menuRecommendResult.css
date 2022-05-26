@@ -4,8 +4,10 @@
 .main {
   height: 70vh;
   text-align: center;
-  padding: 5vh 0;
+  padding: 2vh 0;
+  margin-bottom:200px;
 }
+
 .main h2 {
   font-size: 34px;
   margin-bottom: 20px;
@@ -31,19 +33,19 @@
   ~ .keyword_nav
   li:nth-child(1)
   .keyword_nav__item {
-  background-color: #E8C08B;
+  background-color: var(--color-parsonage);
 }
 #keyword_nav__trigger02:checked
   ~ .keyword_nav
   li:nth-child(2)
   .keyword_nav__item {
-  background-color: #E8C08B;
+  background-color: var(--color-parsonage);
 }
 #keyword_nav__trigger03:checked
   ~ .keyword_nav
   li:nth-child(3)
   .keyword_nav__item {
-  background-color:#E8C08B;
+  background-color: var(--color-parsonage);
 }
 
 .main .keyword_nav ul::after {
@@ -69,7 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color : #A36448;
+  color : var(--color-stirrup);
 }
 
 .main .keyword_box .keyword_box__item {
@@ -78,11 +80,11 @@
 
 .main .keyword_box .keyword_box__item form {
   height: 400px;
-  border: 8px solid #f5cd79;
+  border: 8px solid var(--color-olympic);
 }
 
 .main .keyword_box .keyword_box__item form input:checked + label {
-  background-color: #E8C08B;
+  background-color: var(--color-parsonage);
 }
 
 .main .keyword_box .keyword_box__item form label {
@@ -94,7 +96,7 @@
   font-size: 18px;
   font-weight: bold;
   height: 33.33%;
-  color : #A36448;
+  color : var(--color-stirrup);
 }
 
 #keyword_nav__trigger01:checked ~ .keyword_box li.keyword_box__item:nth-child(1) {
@@ -110,7 +112,6 @@
 .main .inner button {
   width: 48%;
   height: 50px;
-/*   font-weight: bold; */
   font-size: 18px;
   margin-top: 20px;
   float: left;

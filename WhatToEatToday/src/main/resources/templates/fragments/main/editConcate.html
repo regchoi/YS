@@ -8,10 +8,10 @@
         th:object="${editConcateForm}"
         class="eating_house"
       >
-
-        <fieldset class="text__field eating_house__fieldset">
+		<address class="editConcate__title">카테고리 수정</address>
+        <fieldset class="text__field">
           <fieldset class="eating_house__fieldset">
-            <legend class="eating_house__legend">기존 카테고리</legend>
+            <legend class="eating_house__legend">기존 카테고리명</legend>
             <h3
               th:text="${condition}"
                 id="name"
@@ -19,7 +19,7 @@
             />
           </fieldset>
           <fieldset class="eating_house__fieldset">
-            <legend class="eating_house__legend">바꾸고 싶은 카테고리</legend>
+            <legend class="eating_house__legend">새로운 카테고리명</legend>
             <input
               id="after"
               th:field="*{after}"
@@ -28,8 +28,10 @@
             />
           </fieldset>
         </fieldset>
-        <button class="eating_house__button">수정하기</button>
-        <a class="eating_house__button" th:href="@{/admin/admin_recommend}">돌아가기</a>
+        <fieldset class="eating_house__button__container">
+        	<button class="eating_house__button">수정하기</button>
+        	<a class="eating_house__button" th:href="@{/admin/admin_recommend}">돌아가기</a>
+      	</fieldset>
       </form>
     </div>
   </main>

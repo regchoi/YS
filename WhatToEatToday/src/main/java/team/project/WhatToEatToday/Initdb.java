@@ -194,87 +194,14 @@
 //        	Condition condition45 = createCondition(45L, "기념일", concate3);
 //        	em.persist(condition45);
 //
-////            ConditionMenu conditionMenu011 = createConditionMenu(1L, "치킨", condition1);
-////            em.persist(conditionMenu011);
-////            ConditionMenu conditionMenu012 = createConditionMenu(2L, "피자", condition1);
-////            em.persist(conditionMenu012);
-////            ConditionMenu conditionMenu013 = createConditionMenu(3L, "고기", condition1);
-////            em.persist(conditionMenu013);
-////            ConditionMenu conditionMenu021 = createConditionMenu(4L, "카레", condition2);
-////            em.persist(conditionMenu021);
-////            ConditionMenu conditionMenu022 = createConditionMenu(5L, "연어", condition2);
-////            em.persist(conditionMenu022);
-////            ConditionMenu conditionMenu023 = createConditionMenu(6L, "녹차", condition2);
-////            em.persist(conditionMenu023);
-////            ConditionMenu conditionMenu031 = createConditionMenu(7L, "커피", condition3);
-////            em.persist(conditionMenu031);
-////            ConditionMenu conditionMenu032 = createConditionMenu(8L, "아이스크림", condition3);
-////            em.persist(conditionMenu032);
-////            ConditionMenu conditionMenu033 = createConditionMenu(9L, "과자", condition3);
-////            em.persist(conditionMenu033);
-////            ConditionMenu conditionMenu041 = createConditionMenu(10L, "닭볶음탕", condition4);
-////            em.persist(conditionMenu041);
-////            ConditionMenu conditionMenu042 = createConditionMenu(11L, "떡볶이", condition4);
-////            em.persist(conditionMenu042);
-////            ConditionMenu conditionMenu043 = createConditionMenu(12L, "아이스크림", condition4);
-////            em.persist(conditionMenu043);
-////            ConditionMenu conditionMenu051 = createConditionMenu(13L, "스테이크", condition5);
-////            em.persist(conditionMenu051);
-////            ConditionMenu conditionMenu052 = createConditionMenu(14L, "디저트", condition5);
-////            em.persist(conditionMenu052);
-////            ConditionMenu conditionMenu053 = createConditionMenu(15L, "파스타", condition5);
-////            em.persist(conditionMenu053);
-////            ConditionMenu conditionMenu061 = createConditionMenu(16L, "치킨", condition6);
-////            em.persist(conditionMenu061);
-////            ConditionMenu conditionMenu062 = createConditionMenu(17L, "짜장면", condition6);
-////            em.persist(conditionMenu062);
-////            ConditionMenu conditionMenu063 = createConditionMenu(18L, "족발", condition6);
-////            em.persist(conditionMenu063);
-////            ConditionMenu conditionMenu071 = createConditionMenu(19L, "마라탕", condition7);
-////            em.persist(conditionMenu071);
-////            ConditionMenu conditionMenu072 = createConditionMenu(20L, "바나나", condition7);
-////            em.persist(conditionMenu072);
-////            ConditionMenu conditionMenu073 = createConditionMenu(21L, "고구마", condition7);
-////            em.persist(conditionMenu073);
-////            ConditionMenu conditionMenu081 = createConditionMenu(22L, "다크초콜릿", condition6);
-////            em.persist(conditionMenu081);
-////            ConditionMenu conditionMenu082 = createConditionMenu(23L, "연어", condition6);
-////            em.persist(conditionMenu082);
-////            ConditionMenu conditionMenu083 = createConditionMenu(24L, "견과류", condition6);
-////            em.persist(conditionMenu083);
+//        	ConditionMenu[] cond = new ConditionMenu[145];
+//        	for(int i = 0; i < 145; i++) {
+//        		cond[i] = createConditionMenu("견과류"+i, condition1);
+//            	em.persist(cond[i]);
+//        	}
 //
-//
-//            ConditionMenu conditionMenu1 = createConditionMenu("견과류", condition1);
-//            em.persist(conditionMenu1);
-//            ConditionMenu conditionMenu2 = createConditionMenu("견과류", condition2);
-//            em.persist(conditionMenu2);
-//            ConditionMenu conditionMenu3 = createConditionMenu("견과류", condition3);
-//            em.persist(conditionMenu3);
-//            ConditionMenu conditionMenu4 = createConditionMenu("견과류", condition4);
-//            em.persist(conditionMenu4);
-//            ConditionMenu conditionMenu5 = createConditionMenu("견과류", condition5);
-//            em.persist(conditionMenu5);
-//            ConditionMenu conditionMenu6 = createConditionMenu("견과류", condition6);
-//            em.persist(conditionMenu6);
-//            ConditionMenu conditionMenu7 = createConditionMenu("견과류", condition7);
-//            em.persist(conditionMenu7);
-//            ConditionMenu conditionMenu8 = createConditionMenu("견과류", condition8);
-//            em.persist(conditionMenu8);
-//            ConditionMenu conditionMenu9 = createConditionMenu("견과류", condition9);
-//            em.persist(conditionMenu9);
-//            ConditionMenu conditionMenu10 = createConditionMenu("견과류", condition10);
-//            em.persist(conditionMenu10);
-//            ConditionMenu conditionMenu11 = createConditionMenu("견과류", condition11);
-//            em.persist(conditionMenu11);
-//            ConditionMenu conditionMenu12 = createConditionMenu("견과류", condition12);
-//            em.persist(conditionMenu12);
-//            ConditionMenu conditionMenu13 = createConditionMenu("견과류", condition13);
-//            em.persist(conditionMenu13);
-//            ConditionMenu conditionMenu14 = createConditionMenu("견과류", condition14);
-//            em.persist(conditionMenu14);
-//            ConditionMenu conditionMenu15 = createConditionMenu("견과류", condition15);
-//            em.persist(conditionMenu15);
-//
+//            CrossMenu crossMenu = createCrossMenu("기타");
+//            em.persist(crossMenu);
 //
 //
 //
@@ -317,13 +244,13 @@
 //            customer.setAddress(address);
 //            return customer;
 //        }
-//        public Category createCategoryOne(Long id, String name) {
+//        private Category createCategoryOne(Long id, String name) {
 //            Category category = new Category();
 //            category.setId(id);
 //            category.setName(name);
 //            return category;
 //        }
-//        public Category createCategory(Long id, String name, Category ids) {
+//        private Category createCategory(Long id, String name, Category ids) {
 //            Category cate = ids;
 //            Category category = new Category();
 //            category.setId(id);
@@ -332,14 +259,14 @@
 //            return category;
 //        }
 //
-//        public ConditionCategory createConditionCategory(Long id, String name) {
+//        private ConditionCategory createConditionCategory(Long id, String name) {
 //        	ConditionCategory concate = new ConditionCategory();
 //        	concate.setId(id);
 //        	concate.setName(name);
 //        	return concate;
 //        }
 //
-//        public Condition createCondition(Long id, String name, ConditionCategory concate) {
+//        private Condition createCondition(Long id, String name, ConditionCategory concate) {
 //        	Condition condition = new Condition();
 //        	condition.setId(id);
 //        	condition.setName(name);
@@ -347,12 +274,18 @@
 //        	return condition;
 //        }
 //
-//        public ConditionMenu createConditionMenu(String name, Condition condition){
+//        private ConditionMenu createConditionMenu(String name, Condition condition){
 //            ConditionMenu conditionMenu = new ConditionMenu();
 ////            conditionMenu.setId(id);
 //            conditionMenu.setName(name);
 //            conditionMenu.setCondition(condition);
 //            return conditionMenu;
+//        }
+//
+//        private CrossMenu createCrossMenu(String name) {
+//            CrossMenu crossMenu = new CrossMenu();
+//            crossMenu.setName(name);
+//            return crossMenu;
 //        }
 //
 //

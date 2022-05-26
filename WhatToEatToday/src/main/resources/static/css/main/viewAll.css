@@ -10,7 +10,7 @@
 
 .eating_house {
   position: relative;
-  background-color: #ece6cc;
+  background-color: var(--color-ivory);
   padding: 20px 10px 10px;
   border-radius: 10px;
 }
@@ -23,7 +23,7 @@
   margin-top: -100px;
   margin-left: -10px;
   height: 10%;
-  background-color: #979383;
+  background-color: var(--color-benjamin-moore);
   border-radius: 60px 60px 0 0;
 }
 
@@ -39,6 +39,7 @@
   width: 100%;
   display: block;
 }
+
 .eating_house__img {
   border-radius: 5px;
   vertical-align: middle;
@@ -54,25 +55,32 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  }
+}
 
 .eating_house__text {
   width: calc(100%-80px);
   padding: 10px;
   padding-left: 20px;
   height: 100%;
-  float: left;
-  color: #494841;
-}
-.eating_house__text h2 {
-  margin-bottom: 10px;
+  color: var(--color-crown-diamond);
 }
 
 .eating_house__text h2 {
   font-size: var(--font-medium);
+  margin-bottom: 10px;
+  padding-left: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 
 .eating_house__text p {
-	font-family: "hanna2";
-	font-weight: bold;
+  font-family: "hanna2";
+  font-weight: bold;
+  padding-left: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }

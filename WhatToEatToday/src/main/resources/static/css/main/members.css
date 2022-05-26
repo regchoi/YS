@@ -14,7 +14,7 @@
 .members__summary {
   padding: 20px 30px;
   font-size: 40px;
-  background-color: #0a3d62;
+  background-color: var(--color-forest-blues);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +32,7 @@ input[name="map_active_button"] {
 .members {
   width: 100%;
   border-collapse: collapse;
-  border: 2px solid #0a3d62;
+  border: 2px solid var(--color-forest-blues);
 }
 
 .members .members__caption {
@@ -47,16 +47,16 @@ input[name="map_active_button"] {
   padding: 5px 0;
   color: black;
   vertical-align: middle;
-  border: 2px solid #0a3d62;
-  border-bottom: 2px solid #0a3d62;
+  border: 2px solid var(--color-forest-blues);
+  border-bottom: 2px solid var(--color-forest-blues);
   background-color: white;
 }
 
 .members tr th {
-  border: 2px solid #0a3d62;
+  border: 2px solid var(--color-forest-blues);
   font-size: var(--font-regular);
   font-family: "NotoSansKR-Bold";
-  border-bottom: 1px solid #0a3d62;
+  border-bottom: 1px solid var(--color-forest-blues);
 }
 
 .members tr td {
@@ -71,13 +71,13 @@ input[name="map_active_button"] {
 }
 
 .members tbody tr td:nth-child(1) {
-	padding-left: 0px;
-	text-align: center;
+  padding-left: 0px;
+  text-align: center;
 }
 
 .members tbody tr td:nth-child(9) {
-	padding-left: 0px;
-	text-align: center;
+  padding-left: 0px;
+  text-align: center;
 }
 
 .members tbody tr td:nth-child(8) label[for*="map_active_button"] {
@@ -107,7 +107,7 @@ input[name="map_active_button"] {
 .members tbody tr td:nth-child(8) label[for="map_close_button"] .map_outer {
   margin-top: 100px;
   padding: 30px;
-  background-color: #f5cd79;
+  background-color: var(--color-olympic);
   display: inline-block;
   border-radius: 15px;
 }
@@ -120,43 +120,22 @@ input[name="map_active_button"] {
   z-index: 2;
 }
 
-.members
-  tbody
-  tr
-  td:nth-child(8)
-  label[for="map_close_button"]
-  .map_outer
-  figcaption {
+.members tbody tr td:nth-child(8) label[for="map_close_button"] .map_outer figcaption {
   margin-top: 30px;
   color: black;
   font-family: "hanna";
 }
 
-.members
-  tbody
-  tr
-  td:nth-child(8)
-  label[for="map_close_button"]
-  .map_outer
-  figcaption {
+.members tbody tr td:nth-child(8) label[for="map_close_button"] .map_outer figcaption {
   font-size: var(--font-medium);
   text-align: center;
 }
 
-.members
-  tbody
-  tr
-  td:nth-child(8)
-  input[name="map_active_button"]:checked
-  + label[for="map_close_button"] {
+.members tbody tr td:nth-child(8) input[name="map_active_button"]:checked+label[for="map_close_button"] {
   display: block;
 }
 
-.members
-  tbody
-  tr
-  td:nth-child(9) {
+.members tbody tr td:nth-child(9) {
   color: var(--color-jalapeno-red);
   text-decoration: underline;
 }
-

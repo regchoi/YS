@@ -1,76 +1,60 @@
 @charset "UTF-8";
 
 @font-face {
-  src: url(/font/BMJUA_ttf.ttf);
-  font-family: "jua";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Thin.otf);
-  font-family: "NotoSansKR-Thin";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Light.otf);
-  font-family: "NotoSansKR-Light";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Regular.otf);
-  font-family: "NotoSansKR-Regular";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Medium.otf);
-  font-family: "NotoSansKR-Medium";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Bold.otf);
-  font-family: "NotoSansKR-Bold";
-}
-@font-face {
-  src: url(/font/NotoSansKR-Black.otf);
-  font-family: "NotoSansKR-Black";
-}
-@font-face {
   src: url(/font/BMHANNAPro.ttf);
   font-family: "hanna";
 }
-@font-face{
-	src: url(/font/BMHANNAAir_ttf.ttf);
-	font-family:"hanna2"
-}
+
 @font-face {
-  src: url(/font/SCDream8.otf);
-  font-family: "scdream";
+  src: url(/font/BMHANNAAir_ttf.ttf);
+  font-family: "hanna2"
 }
+
 @font-face {
   src: url(/font/Jalnan.ttf);
   font-family: "jalnan";
 }
-@font-face{
-	src: url(/font/GmarketSansTTFMedium.ttf);
-	font-family:"GmarketSans"
+
+@font-face {
+  src: url(/font/GmarketSansTTFMedium.ttf);
+  font-family: "GmarketSans"
 }
+
+@font-face {
+  src: url(/font/NotoSansKR-Bold.otf);
+  font-family: "NotoSansKR-Bold";
+}
+
+@font-face {
+  src: url(/font/NotoSansKR-Regular.otf);
+  font-family: "NotoSansKR-Regular";
+}
+
 /* Global */
 
 :root {
   /* Color */
-  --color-flat-flesh: #fad390;
+  --color-jalapeno-red: #b71540;
+  --color-stirrup: #A36448;
+  --color-olympic: #f5cd79;
+  --color-parsonage: #E8C08B;
   --color-squash-blossom: #f6b93b;
   --color-iceland-poppy: #fa983a;
   --color-carrot-orange: #e58e26;
-  --color-melon-melody: #f8c291;
-  --color-mandarin-red: #e55039;
-  --color-tomato-red: #eb2f06;
-  --color-jalapeno-red: #b71540;
-  --color-azraq-blue: #4a69bd;
-  --color-yue-guang-lan-blue: #1e3799;
-  --color-dark-sapphire: #0c2461;
   --color-spray: #82ccdd;
-  --color-dupin: #60a3bc;
-  --color-good-samaritan: #3c6382;
-  --color-forest-blues: #0a3d62;
-  --color-paradise-green: #b8e994;
-  --color-aurora-green: #78e08f;
+  --color-dupain: #60a3bc;
   --color-waterfall: #38ada9;
   --color-reef-encounter: #079992;
+  --color-forest-blues: #0a3d62;
+  --color-dark-sapphire: #0c2461;
+  --color-snowflake-white: #efefef;
+  --color-ivory: #ece6cc;
+  --color-evonik-degussa: #dee1d1;
+  --color-limestrong: #c0bca7;
+  --color-benjamin-moore: #979383;
+  --color-little-greene: #8b8b8b;
+  --color-bristol: #6f6c61;
+  --color-crown-diamond: #494841;
 
   /* Font size */
   --font-large: 48px;
@@ -95,6 +79,7 @@
 * {
   box-sizing: border-box;
 }
+
 a {
   text-decoration: none;
   color: inherit;
@@ -113,6 +98,7 @@ a {
   max-width: 1024px;
   margin: auto;
 }
+
 .inner::after {
   content: "";
   display: block;
@@ -150,9 +136,9 @@ label {
   padding: 30px 100px;
 }
 
-.main .inner > h2 {
+.main .inner>h2 {
   text-align: center;
-  color: #0a3d62;
+  color: var(--color-forest-blues);
   font-size: var(--font-large);
 }
 
@@ -166,7 +152,7 @@ label {
 
 .download_button:hover {
   background-color: white;
-  color: #0a3d62;
+  color: var(--color-forest-blues);
 }
 
 .loading {
@@ -181,9 +167,9 @@ label {
   z-index: 2;
   background-color: #e6f4fa4D;
   backdrop-filter: blur(10px);
-  color: saddlebrown;
   font-size: 34px;
 }
+
 .loading figure {
   position: relative;
   width: 100%;

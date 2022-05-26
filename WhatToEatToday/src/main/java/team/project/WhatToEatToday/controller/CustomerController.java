@@ -2,14 +2,12 @@ package team.project.WhatToEatToday.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import team.project.WhatToEatToday.Service.CategoryService;
 import team.project.WhatToEatToday.Service.ConditionCategoryService;
+import team.project.WhatToEatToday.Service.ConditionMenuService;
 import team.project.WhatToEatToday.Service.ConditionService;
 import team.project.WhatToEatToday.Service.CustomerService;
 import team.project.WhatToEatToday.Service.EatingHouseService;
@@ -17,12 +15,14 @@ import team.project.WhatToEatToday.Service.MenuService;
 import team.project.WhatToEatToday.domain.Category;
 import team.project.WhatToEatToday.domain.Condition;
 import team.project.WhatToEatToday.domain.ConditionCategory;
+import team.project.WhatToEatToday.domain.ConditionMenu;
 import team.project.WhatToEatToday.domain.EatingHouse;
 import team.project.WhatToEatToday.domain.Menu;
 import team.project.WhatToEatToday.domain.member.Customer;
 import team.project.WhatToEatToday.domain.member.Manager;
 import team.project.WhatToEatToday.domain.member.Member;
 import team.project.WhatToEatToday.dto.JoinForm;
+import team.project.WhatToEatToday.dto.LongIdForm;
 import team.project.WhatToEatToday.dto.MenuForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +32,7 @@ import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/customer")
@@ -43,6 +44,7 @@ public class CustomerController {
     private final CategoryService categoryService;
     private final ConditionService conditionService;
     private final ConditionCategoryService conditionCategoryService;
+    private final ConditionMenuService conditionMenuService;
 
 	@GetMapping("/mypage/{customerId}")
     public String getMypage(@PathVariable String customerId, Model model) {
@@ -52,7 +54,7 @@ public class CustomerController {
     }
 
     @GetMapping("/mypage/edit/{customerId}")
-    public String editMypage(@PathVariable String customerId, Model model, JoinForm joinForm) {
+    public String getEditMypage(@PathVariable String customerId, Model model, JoinForm joinForm) {
         model.addAttribute("customer", customerService.findOne(customerId));
         model.addAttribute("JoinForm", joinForm);
         model.addAttribute("page", "editCustomerInfo");
@@ -60,7 +62,7 @@ public class CustomerController {
     }
 
     @PostMapping("/mypage/edit/{customerId}")
-    public String editMypage(HttpServletRequest request , @PathVariable String customerId, @Valid JoinForm joinForm) {
+    public String postEditMypage(HttpServletRequest request , @PathVariable String customerId, @Valid JoinForm joinForm) {
         HttpSession session = request.getSession();
         Customer customer = customerService.findOne(customerId);
         customer.setName(joinForm.getName());
@@ -75,7 +77,7 @@ public class CustomerController {
     }
 
     @GetMapping("/mypage/delete/{customerId}")
-    public String editMypage(HttpServletRequest request , @PathVariable String customerId) {
+    public String deleteMypage(HttpServletRequest request , @PathVariable String customerId) {
         HttpSession session = request.getSession();
         Customer customer = customerService.findOne(customerId);
         customerService.delete(customer);
@@ -85,7 +87,7 @@ public class CustomerController {
 	
 
 	@GetMapping("/recommend")
-    public String recommendMenu(HttpServletRequest request, Model model) {
+    public String recommendMenu(HttpServletRequest request, Model model, LongIdForm longIdForm) {
         HttpSession session= request.getSession();
         try {
             Member member = (Member) session.getAttribute("member");
@@ -104,7 +106,8 @@ public class CustomerController {
             model.addAttribute("condition2", conditionList2);
             List<Condition> conditionList3 = conditionService.findCate1(3L);
             model.addAttribute("condition3", conditionList3);
-            
+
+            model.addAttribute("longIdForm", longIdForm);
             model.addAttribute("page", "menuRecommend");
             
             return "layout";
@@ -117,9 +120,46 @@ public class CustomerController {
 
 	@GetMapping("/recommendResult")
     public String recommendMenuResult(Model model) {
+		
+		
+		List<Menu> menuList = menuService.findAll();
+		
+		HashMap<String, Object> menus = new HashMap<>();
+		List<Long> menuId = new ArrayList<>();
+        List<String> menuName = new ArrayList<>();
+        List<Integer> menuPrice = new ArrayList<>();
+        List<String> menuAddress = new ArrayList<>();
+        List<String> menuStore = new ArrayList<>();
+        for (Menu menu : menuList){
+        	  menuId.add(menu.getId());
+        	  menuName.add(menu.getName());
+        	  menuPrice.add(menu.getPrice());
+        	  menuAddress.add(menu.getEatingHouse().getAddress());
+        	  menuStore.add(menu.getEatingHouse().getName());
+        }
+        menus.put("id", menuId);
+        menus.put("name", menuName);
+        menus.put("price", menuPrice);
+        menus.put("address", menuAddress);
+        menus.put("store", menuStore);
+		
+        model.addAttribute("menus", menus);
+        model.addAttribute("menuList", menuList);
+
     	model.addAttribute("page", "menuRecommendResult");
         return "layout";
 
+    }
+    @GetMapping("/eating_house/{eatingHouseId}")
+    public String serarchEatingHouse(@PathVariable Long eatingHouseId, Model model) {
+
+
+        EatingHouse eatingHouses = eatingHouseService.findOne(eatingHouseId);
+
+        model.addAttribute("page", "viewKfood");
+        model.addAttribute("eatingHouse", eatingHouses);
+
+        return "layout";
     }
 	
 	
@@ -162,7 +202,6 @@ public class CustomerController {
 
 
         EatingHouse eatingHouses = eatingHouseService.findOne(eatingHouseId);
-        System.out.println(eatingHouses.getMenus());
 
 
         model.addAttribute("eatingHouse", eatingHouses);

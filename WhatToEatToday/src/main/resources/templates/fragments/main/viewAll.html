@@ -12,8 +12,10 @@
 
                     <div class="eating_house__text">
                         <h2 th:text = "${eatingHouse.getName()}">가게이름</h2>
+                        
                         <p id="eatingHouse_address" th:text = "${eatingHouse.getAddress()}">가게주소</p>
                         <p th:text = "${eatingHouse.getAddressDetail()}" style="display:none">가게 상세주소</p>
+                      
                     </div>
                 </a>
             </li>

@@ -57,4 +57,9 @@ public class MenuService {
         return menuRepository.findByName(name);
     }
 
+    public List<Menu> findByConditionId(Long id) { return menuRepository.findByConditionMenuId(id); }
+
+    public List<Menu> findCrossMenuId(Long id) { return menuRepository.findCrossMenu(id); }
+
+
 }

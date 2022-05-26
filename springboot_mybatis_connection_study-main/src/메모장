@@ -1,0 +1,31 @@
+create table member (
+member_id long auto_increment,
+id varchar(255),
+password varchar(255),
+name varchar(255),
+primary key(member_id)
+)
+
+insert into member(id,password,name) values('abc','abc','abc')
+
+<script>
+
+    $("#form").on("click", function () {
+    var checkid = document.getElementById("id");
+    var checkpw = document.getElementById("pw");
+
+    if(checkid.value == "") {
+        alert("아이디를 입력해주세요");
+        return false;
+    };
+
+    if(checkpw.value == "") {
+        alert("비밀번호를 입력해주세요");
+        return false;
+    };
+
+    document.getElementById("form").submit();
+
+    });
+
+</script>

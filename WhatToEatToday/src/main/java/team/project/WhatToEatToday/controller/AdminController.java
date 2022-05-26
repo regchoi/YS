@@ -7,10 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import team.project.WhatToEatToday.Service.*;
-import team.project.WhatToEatToday.domain.Condition;
-import team.project.WhatToEatToday.domain.ConditionCategory;
-import team.project.WhatToEatToday.domain.ConditionMenu;
-import team.project.WhatToEatToday.domain.Menu;
+import team.project.WhatToEatToday.domain.*;
 import team.project.WhatToEatToday.domain.member.Admin;
 import team.project.WhatToEatToday.domain.member.Customer;
 import team.project.WhatToEatToday.domain.member.Manager;
@@ -37,6 +34,7 @@ public class AdminController {
     public final ConditionCategoryService conditionCategoryService;
     public final ConditionMenuService conditionMenuService;
     public final MenuService menuService;
+    public final CrossMenuService crossMenuService;
 
     @GetMapping("/members")
     public String getMembers(Model model) {
@@ -115,6 +113,15 @@ public class AdminController {
         model.addAttribute("condition2", conditionList2);
         List<Condition> conditionList3 = conditionService.findCate1(3L);
         model.addAttribute("condition3", conditionList3);
+        
+        ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+        model.addAttribute("concate1", concate1); 
+        ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+        model.addAttribute("concate2", concate2); 
+        ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+        model.addAttribute("concate3", concate3); 
+        
+        
 
         model.addAttribute("page", "menuRecommendAdmin");
         return "layout";
@@ -135,6 +142,12 @@ public class AdminController {
         ConditionCategory conditionCategory = conditionCategoryService.findOne(1L);
         conditionCategory.setName(editConcateForm.getAfter());
         conditionCategoryService.save(conditionCategory);
+        ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+        model.addAttribute("concate1", concate1); 
+        ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+        model.addAttribute("concate2", concate2);
+        ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+        model.addAttribute("concate3", concate3); 
 
         List<Condition> conditionList1 = conditionService.findCate1(1L);
         model.addAttribute("condition1", conditionList1);
@@ -161,6 +174,12 @@ public class AdminController {
         ConditionCategory conditionCategory = conditionCategoryService.findOne(2L);
         conditionCategory.setName(editConcateForm.getAfter());
         conditionCategoryService.save(conditionCategory);
+        ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+        model.addAttribute("concate1", concate1); 
+        ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+        model.addAttribute("concate2", concate2);
+        ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+        model.addAttribute("concate3", concate3); 
 
         List<Condition> conditionList1 = conditionService.findCate1(1L);
         model.addAttribute("condition1", conditionList1);
@@ -187,6 +206,14 @@ public class AdminController {
         ConditionCategory conditionCategory = conditionCategoryService.findOne(3L);
         conditionCategory.setName(editConcateForm.getAfter());
         conditionCategoryService.save(conditionCategory);
+        ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+        model.addAttribute("concate1", concate1); 
+        ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+        model.addAttribute("concate2", concate2);
+        ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+        model.addAttribute("concate3", concate3);  
+        
+        
         List<Condition> conditionList1 = conditionService.findCate1(1L);
         model.addAttribute("condition1", conditionList1);
         List<Condition> conditionList2 = conditionService.findCate1(2L);
@@ -220,6 +247,15 @@ public class AdminController {
         model.addAttribute("condition2", conditionList2);
         List<Condition> conditionList3 = conditionService.findCate1(3L);
         model.addAttribute("condition3", conditionList3);
+        
+        
+        ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+        model.addAttribute("concate1", concate1); 
+        ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+        model.addAttribute("concate2", concate2);
+        ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+        model.addAttribute("concate3", concate3);  
+        
 
         model.addAttribute("page", "menuRecommendAdmin");
         return "layout";
@@ -241,36 +277,89 @@ public class AdminController {
 
     @PostMapping("/admin_recommend/editCondition/{conditionId}/editMenu/{conditionMenuId}")
     public String editConditionMenus(EditConditionForm editConditionForm, Model model,
-                                    @RequestParam(value = "name") String before,
                                     @PathVariable Long conditionId,
                                     @PathVariable Long conditionMenuId) {
+        if(!(editConditionForm.getAfter().isBlank())){
+            ConditionMenu conditionMenu = conditionMenuService.findOne(conditionMenuId);
+            conditionMenu.setName(editConditionForm.getAfter());
+            conditionMenuService.save(conditionMenu);
 
-        ConditionMenu conditionMenu = conditionMenuService.findOne(conditionMenuId);
-        System.out.println("=======================================");
-        System.out.println(before);
-        System.out.println("=======================================");
-        conditionMenu.setName(editConditionForm.getAfter());
-        conditionMenuService.save(conditionMenu);
+            if(!(crossMenuService.findNewByName(editConditionForm.getAfter()).isEmpty())){
+                conditionMenu.setCrossMenu(crossMenuService.findByName(editConditionForm.getAfter()));
+                conditionMenuService.save(conditionMenu);
+                List<Menu> menuList = menuService.findByName(editConditionForm.getAfter());
+                for(int i=0; i< menuList.size(); i++){
+                    if(menuList.get(i).getCrossMenu().getId().equals(146L)){
+                        menuList.get(i).setCrossMenu(crossMenuService.findByName(editConditionForm.getAfter()));
+                        menuService.join(menuList.get(i));
+                    }
+                }
+            } else{
+                CrossMenu crossMenu = new CrossMenu();
+                crossMenu.setName(editConditionForm.getAfter());
+                crossMenuService.save(crossMenu);
+                conditionMenu.setCrossMenu(crossMenu);
+                conditionMenuService.save(conditionMenu);
 
-        if(!(menuService.findByName(editConditionForm.getBefore()).isEmpty())){
-
-            List<Menu> menu = menuService.findByName(editConditionForm.getBefore());
-            for(int i=0; i<menu.size(); i++){
-                menu.get(i).setConditionMenu(conditionMenu);
-                menuService.join(menu.get(i));
+                List<Menu> menuList = menuService.findByName(editConditionForm.getAfter());
+                for(int i=0; i< menuList.size(); i++){
+                    if(menuList.get(i).getCrossMenu().getId().equals(146L)){
+                        menuList.get(i).setCrossMenu(crossMenu);
+                        menuService.join(menuList.get(i));
+                    }
+                }
             }
+
+            List<Condition> conditionList1 = conditionService.findCate1(1L);
+            model.addAttribute("condition1", conditionList1);
+            List<Condition> conditionList2 = conditionService.findCate1(2L);
+            model.addAttribute("condition2", conditionList2);
+            List<Condition> conditionList3 = conditionService.findCate1(3L);
+            model.addAttribute("condition3", conditionList3);
+
+            ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+            model.addAttribute("concate1", concate1);
+            ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+            model.addAttribute("concate2", concate2);
+            ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+            model.addAttribute("concate3", concate3);
+            model.addAttribute("page", "menuRecommendAdmin");
+            List<Menu> menu = menuService.findByName(editConditionForm.getBefore());
+            return "redirect:/admin/admin_recommend/editCondition/{conditionId}";
+        } else{
+            List<Condition> conditionList1 = conditionService.findCate1(1L);
+            model.addAttribute("condition1", conditionList1);
+            List<Condition> conditionList2 = conditionService.findCate1(2L);
+            model.addAttribute("condition2", conditionList2);
+            List<Condition> conditionList3 = conditionService.findCate1(3L);
+            model.addAttribute("condition3", conditionList3);
+
+            ConditionCategory concate1 = conditionCategoryService.findOne(1L);
+            model.addAttribute("concate1", concate1);
+            ConditionCategory concate2 = conditionCategoryService.findOne(2L);
+            model.addAttribute("concate2", concate2);
+            ConditionCategory concate3 = conditionCategoryService.findOne(3L);
+            model.addAttribute("concate3", concate3);
+            model.addAttribute("page", "menuRecommendAdmin");
+            List<Menu> menu = menuService.findByName(editConditionForm.getBefore());
+            return "redirect:/admin/admin_recommend/editCondition/{conditionId}";
         }
 
-        List<Condition> conditionList1 = conditionService.findCate1(1L);
-        model.addAttribute("condition1", conditionList1);
-        List<Condition> conditionList2 = conditionService.findCate1(2L);
-        model.addAttribute("condition2", conditionList2);
-        List<Condition> conditionList3 = conditionService.findCate1(3L);
-        model.addAttribute("condition3", conditionList3);
-        model.addAttribute("page", "menuRecommendAdmin");
-        List<Menu> menu = menuService.findByName(editConditionForm.getBefore());
-        return "layout";
     }
+
+    @GetMapping("/admin_recommend/editCondition/{conditionId}/delete/{conditionMenuId}")
+    public String deleteConditionMenu(
+            HttpServletRequest request,
+            @PathVariable Long conditionId,
+            @PathVariable Long conditionMenuId){
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "메뉴삭제");
+        ConditionMenu conditionMenu = conditionMenuService.findOne(conditionMenuId);
+        conditionMenuService.delete(conditionMenu);
+        return "redirect:/admin/admin_recommend/editCondition/{conditionId}";
+    }
+    
+    
     @GetMapping("/admin_recommend/editCondition/{conditionId}/addMenu")
     public String addConditionMenu(EditConditionForm editConditionForm, Model model,
                                     @PathVariable Long conditionId) {
@@ -293,17 +382,26 @@ public class AdminController {
             ConditionMenu conditionMenu = new ConditionMenu();
             conditionMenu.setName(editConditionForm.getAfter());
             conditionMenu.setCondition(condition);
-            conditionMenuService.save(conditionMenu);
-            if(!(menuService.findByName(editConditionForm.getAfter()).isEmpty())){
-                List<Menu> menu = menuService.findByName(editConditionForm.getAfter());
-                for (int i=0; i<menu.size(); i++){
-                    menu.get(i).setConditionMenu(conditionMenu);
-                    menuService.join(menu.get(i));
+            if(!(crossMenuService.findNewByName(editConditionForm.getAfter()).isEmpty())){
+                conditionMenu.setCrossMenu(crossMenuService.findByName(editConditionForm.getAfter()));
+                conditionMenuService.save(conditionMenu);
+            } else{
+                CrossMenu crossMenu = new CrossMenu();
+                crossMenu.setName(editConditionForm.getAfter());
+                conditionMenu.setCrossMenu(crossMenu);
+                crossMenuService.save(crossMenu);
+                conditionMenuService.save(conditionMenu);
+
+                List<Menu> menuList = menuService.findByName(editConditionForm.getAfter());
+                for(int i=0; i< menuList.size(); i++){
+                    if(menuList.get(i).getCrossMenu().getId().equals(146L)){
+                        menuList.get(i).setCrossMenu(crossMenu);
+                        menuService.join(menuList.get(i));
+                    }
                 }
 
             }
         }
-
         return "redirect:/admin/admin_recommend/editCondition/{conditionId}";
     }
 

@@ -35,12 +35,8 @@ public class HomeController {
     public String SearchResult(@RequestParam(required = false, value = "name") String text, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         List<Menu> menuList = menuService.findByName(text);
-        System.out.println("===============================");
-        System.out.println(menuList.toString());
-        System.out.println("==============================");
-
         if(text.isBlank()){
-            session.setAttribute("message", "메뉴를 입력해주세요");
+            session.setAttribute("message", "해당 음식을 판매하는 매장이 없습니다");
             return "redirect:";
         }
         else if(menuList.isEmpty()){

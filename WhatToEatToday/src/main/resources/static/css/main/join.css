@@ -1,19 +1,19 @@
 .main .inner {
   padding-top: 160px;
 }
+
 .join_button {
   width: 48%;
   height: 400px;
   float: left;
-/*   border: 3px solid #0a3d62;   */
   border-radius: 50%;
-  background-color: #82ccdd;
+  background-color: var(--color-spray);
   color: white;
 }
 
 .join_button:hover {
   color: aliceblue;
-  background-color: #60a3bc;
+  background-color: var(--color-dupain);
 }
 
 .join_button:nth-child(2) {

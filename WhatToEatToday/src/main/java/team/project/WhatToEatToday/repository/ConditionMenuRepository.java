@@ -22,13 +22,23 @@ public class ConditionMenuRepository {
             em.merge(conditionMenu);
         }
     }
-    
-    
+
+    public void delete(ConditionMenu conditionMenu) {
+        em.remove(conditionMenu);
+    }
+
+
     public ConditionMenu findOne(Long id) {
         return em.find(ConditionMenu.class, id);
     }
 
- 
+    public List<ConditionMenu> findOneList(Long id) {
+        return em.createQuery("select c from ConditionMenu c where c.id = :id", ConditionMenu.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+
     public List<ConditionMenu> findAll() {
         return em.createQuery("SELECT c FROM ConditionMenu c", ConditionMenu.class)
                 .getResultList();

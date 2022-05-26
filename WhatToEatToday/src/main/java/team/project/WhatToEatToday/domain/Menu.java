@@ -29,16 +29,20 @@ public class Menu {
     private Category categorys;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "condition_menu_id")
-    private ConditionMenu conditionMenu;
-
-
+    @JoinColumn(name = "cross_menu_id")
+    private CrossMenu crossMenu;
     
     public void setCategory(Category category) {
         this.categorys = category;
         category.getMenu().add(this);
 
     }
+
+    public void setCrossMenu(CrossMenu crossMenu) {
+        this.crossMenu = crossMenu;
+        crossMenu.getMenu().add(this);
+    }
+
 
     public void setEatingHouse(EatingHouse eatingHouse) {
         this.eatingHouse = eatingHouse;

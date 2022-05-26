@@ -1,23 +1,23 @@
 .menu {
-  background-color: #dee1d1;
+  background-color: var(--color-evonik-degussa);
   padding: 40px;
   border-radius: 15px;
 }
+
 .menu__fieldset {
-/*   border: 3px solid var(--color-dark-sapphire);
-  background-color: white; */
   margin-bottom: 30px;
   padding-bottom: 15px;
   border-radius: 5px;
 }
 
 .menu__fieldset select {
-	font-family: "hanna"; 
-	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 98% 50%; /* 네이티브 화살표 대체 */ 
-	border: 1px solid white; 
-	appearance: none;
-  }
-  
+  font-family: "hanna";
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 98% 50%;
+  /* 네이티브 화살표 대체 */
+  border: 1px solid white;
+  appearance: none;
+}
+
 
 .menu__fieldset:nth-child(1) {
   margin-bottom: 30px;
@@ -25,43 +25,43 @@
 
 .menu__fieldset:nth-child(2) {
   margin-bottom: 50px;
-     border: 3px solid #c0bca7;
-    background-color: white;
-      border-radius: 8px;
+  border: 3px solid var(--color-limestrong);
+  background-color: white;
+  border-radius: 8px;
 }
 
- .menu__fieldset:nth-child(3) {
-    margin-bottom: 50px; 
-    border: 3px solid #c0bca7;
-    background-color: white;
-      border-radius: 8px;
-  }
-  
-   .menu__fieldset:nth-child(4) {
-/*     margin-bottom: 50px; */
-    border: 3px solid #c0bca7;
-    background-color: white;
-      border-radius: 8px;
-  }
-  
+.menu__fieldset:nth-child(3) {
+  margin-bottom: 50px;
+  border: 3px solid var(--color-limestrong);
+  background-color: white;
+  border-radius: 8px;
+}
+
+.menu__fieldset:nth-child(4) {
+  border: 3px solid var(--color-limestrong);
+  background-color: white;
+  border-radius: 8px;
+}
+
 .menu__legend {
   font-size: var(--font-medium);
   padding: 10px 15px;
   background-color: white;
   margin-left: 20px;
-  color: #8b8b8b;
+  color: var(--color-little-greene);
   border-radius: 8px;
 }
+
 .menu__input {
   padding: 15px 20px;
   width: 100%;
   font-size: var(--font-medium);
-  color: #494841;
+  color: var(--color-crown-diamond);
 }
 
 .menu__input option {
-  	font-family: "hanna2";
-  }
+  font-family: "hanna2";
+}
 
 
 .menu__button {
@@ -69,7 +69,7 @@
   margin-top: 40px;
   padding: 15px;
   width: 100%;
-  background-color: #6f6c61;
+  background-color: var(--color-bristol);
   border-radius: 8px;
   color: whitesmoke;
   border: 0;

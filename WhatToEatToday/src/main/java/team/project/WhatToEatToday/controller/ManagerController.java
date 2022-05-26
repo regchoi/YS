@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import team.project.WhatToEatToday.Service.*;
 import team.project.WhatToEatToday.domain.Category;
-import team.project.WhatToEatToday.domain.Condition;
+import team.project.WhatToEatToday.domain.CrossMenu;
 import team.project.WhatToEatToday.domain.EatingHouse;
 import team.project.WhatToEatToday.domain.Menu;
 import team.project.WhatToEatToday.domain.member.Manager;
@@ -18,6 +18,7 @@ import team.project.WhatToEatToday.repository.CategoryRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,8 @@ public class ManagerController {
     private final EatingHouseService eatingHouseService;
     private final MenuService menuService;
     private final CategoryService categoryService;
+    private final ConditionMenuService conditionMenuService;
+    private final CrossMenuService crossMenuService;
 
     @GetMapping("/eating_house")
     public String getManager(HttpServletRequest request, Model model) {
@@ -117,14 +120,62 @@ public class ManagerController {
     @PostMapping("/eating_house/edit/{eatingHouseId}/menu/add")
     public String postAddMenu(HttpServletRequest request, @PathVariable Long eatingHouseId, @Valid MenuForm menuForm){
         HttpSession session = request.getSession();
-        Menu menu = new Menu();
-        menu.setName(menuForm.getName());
-        menu.setPrice(menuForm.getPrice());
-        menu.setCategorys(categoryService.findOne(menuForm.getCategory()));
-        menu.setEatingHouse(eatingHouseService.findOne(eatingHouseId));
-        menuService.join(menu);
-        session.setAttribute("message", "메뉴추가");
-        return "redirect:/manager/eating_house/edit/" + eatingHouseId;
+        Long checkId = 123456789L;
+        try {
+            Menu menu = new Menu();
+            menu.setName(menuForm.getName());
+            menu.setPrice(menuForm.getPrice());
+            menu.setCategorys(categoryService.findOne(menuForm.getCategory()));
+            menu.setEatingHouse(eatingHouseService.findOne(eatingHouseId));
+            menuService.join(menu);
+
+            List<CrossMenu> checkCrossMenu = crossMenuService.findAll();
+            for(int i=0; i<checkCrossMenu.size(); i++){
+                String checkMenu = checkCrossMenu.get(i).getName();
+                int j = menuService.findByName(checkMenu).size();
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");//
+                System.out.println(checkCrossMenu.get(i).getName());
+                System.out.println(j);
+                System.out.println(checkCrossMenu.size());
+                System.out.println(menuService.findByName(checkMenu));
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                if(!(j==0)){
+                    if(menu.getId().equals(menuService.findByName(checkMenu).get(j-1).getId())){
+                        checkId = checkCrossMenu.get(i).getId();
+                        break;
+                    }
+                }
+
+            }
+
+            System.out.println("========================================");
+            System.out.println(menu.getId());
+            System.out.println(checkId);
+            System.out.println(checkId.toString().isEmpty());
+            System.out.println(checkId.toString().isBlank());
+            System.out.println("========================================");
+
+            if(!(checkId==123456789L)){
+                menu.setCrossMenu(crossMenuService.findOne(checkId));
+                System.out.println("========================================");
+                System.out.println(menu.getCrossMenu());
+                System.out.println("========================================");
+                menuService.join(menu);
+            }else if(checkId==123456789L){
+                menu.setCrossMenu(crossMenuService.findByName("기타"));
+//                CrossMenu crossMenu = new CrossMenu();
+//                crossMenu.setName(menuForm.getName());
+//                menu.setCrossMenu(crossMenu);
+//                crossMenuService.save(crossMenu);
+                menuService.join(menu);
+            }
+            session.setAttribute("message", "메뉴추가");
+            return "redirect:/manager/eating_house/edit/" + eatingHouseId;
+        }
+        catch (Exception e){
+            session.setAttribute("message", "카테고리를 입력하여주세요.");
+            return "redirect:/manager/eating_house/edit/" + eatingHouseId;
+        }
     }
 
     @GetMapping("/eating_house/edit/{eatingHouseId}/menu/edit/{menuId}")
@@ -143,11 +194,8 @@ public class ManagerController {
         return "layout";
     }
     @PostMapping("/eating_house/edit/{eatingHouseId}/menu/edit/{menuId}")
-    public String postEditMenu(
-            HttpServletRequest request,
-            @PathVariable Long eatingHouseId,
-            @PathVariable Long menuId,
-            @Valid MenuForm menuForm){
+    public String postEditMenu(HttpServletRequest request, @PathVariable Long eatingHouseId,
+                               @PathVariable Long menuId, @Valid MenuForm menuForm) {
         HttpSession session = request.getSession();
         session.setAttribute("message", "메뉴수정");
         Menu menu = menuService.findOne(menuId);
@@ -155,8 +203,30 @@ public class ManagerController {
         menu.setPrice(menuForm.getPrice());
         menu.setCategorys(categoryService.findOne(menuForm.getCategory()));
         menuService.join(menu);
-        return "redirect:/manager/eating_house/edit/" + eatingHouseId;
-    }
+
+        Long checkId = 123456789L;
+        List<CrossMenu> checkCrossMenu = crossMenuService.findAll();
+        for (int i = 0; i < checkCrossMenu.size(); i++) {
+            String checkMenu = checkCrossMenu.get(i).getName();
+            int j = menuService.findByName(checkMenu).size();
+            if (!(j == 0)) {
+                if (menu.getId().equals(menuService.findByName(checkMenu).get(j - 1).getId())) {
+                    checkId = checkCrossMenu.get(i).getId();
+                    break;
+                }
+            }
+        }
+        if (!(checkId == 123456789L)) {
+                menu.setCrossMenu(crossMenuService.findOne(checkId));
+                menuService.join(menu);
+            } else if(checkId == 123456789L) {
+                menu.setCrossMenu(crossMenuService.findByName("기타"));
+                menuService.join(menu);
+            }
+
+
+            return "redirect:/manager/eating_house/edit/" + eatingHouseId;
+        }
 
     @GetMapping("/eating_house/edit/{eatingHouseId}/menu/delete/{menuId}")
     public String deleteMenu(

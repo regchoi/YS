@@ -2,13 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <main class="main" th:fragment="main">
     <div class="inner">
-      <h2>회원정보 수정</h2>
+  
       <form
         th:action="@{'/customer/mypage/edit/' + ${customer.getId()} }"
         method="post"
         th:object="${joinForm}"
         class="join"
       >
+      <address class="join__title">회원정보 수정</address>
+      
         <fieldset class="join__fieldset">
           <legend class="join__legend">이름</legend>
           <input
