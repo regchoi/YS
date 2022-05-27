@@ -20,7 +20,9 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findMember(String id) {
+    public List<Member> findMember(String id) {
         return memberRepository.findById(id);
     }
+
+    public void joinMember(Member member) { memberRepository.join(member); }
 }

@@ -15,9 +15,9 @@ public interface MemberMapper {
     List<Member> findAll();
 
     @Select("SELECT * FROM MEMBER WHERE id=#{id}")
-    Member findById(@Param("id") String id);
+    List<Member> findById(@Param("id") String id);
 
-    @Insert("SELECT * FROM MEMBER(member_id, member_password, member_name) VALUES(#{member.id}, #{member.password}, " +
+    @Insert("INSERT INTO member(id, password, name) VALUES(#{member.id}, #{member.password}, " +
             "#{member.name})")
-    int insert(@Param("member") Member member);
+    void insert(@Param("member") Member member);
 }

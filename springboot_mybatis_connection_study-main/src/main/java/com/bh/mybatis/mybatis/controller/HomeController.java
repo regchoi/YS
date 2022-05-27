@@ -1,6 +1,7 @@
 package com.bh.mybatis.mybatis.controller;
 
 import com.bh.mybatis.mybatis.domain.Member;
+import com.bh.mybatis.mybatis.dto.JoinForm;
 import com.bh.mybatis.mybatis.dto.LoginForm;
 import com.bh.mybatis.mybatis.mapper.MemberMapper;
 import com.bh.mybatis.mybatis.service.MemberService;
@@ -31,38 +32,37 @@ public class HomeController {
     public HomeController() {
     }
 
-    @GetMapping
-    public String loginG(Model model, LoginForm loginForm) {
-        model.addAttribute("loginForm", loginForm);
-        return "login";
+
+    @GetMapping("join")
+    public String joinG(Model model, JoinForm joinForm) {
+        model.addAttribute("joinForm", joinForm);
+        return "board/join";
     }
 
-    @PostMapping
-    public String loginP(LoginForm loginForm, HttpServletRequest request) {
-        Member member = new Member();
+    @PostMapping("join")
+    public String joinP(Model model, LoginForm loginForm, JoinForm joinForm, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
-        try {
-            member = memberService.findMember(loginForm.getId());
-        } catch (NullPointerException e){
-            System.out.println("=========================================");
-
-            member.setId("ddd");
-            System.out.println(member.getId());
-
-        }
-        System.out.println("=========================================");
-
-        if(member.getId().equals(loginForm.getId())){
-            return "나중에 게시판";
-        } else {
-            System.out.println("=========================================");
-            System.out.println(loginForm.getId());
-            System.out.println("=========================================");
-            System.out.println(member.getId());
-            session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
+        if(!(memberService.findMember(joinForm.getId()).isEmpty())){
+            session.setAttribute("message", "이미 존재하는 아이디입니다");
+            return "board/join";
+        } else if(!(joinForm.getPassword().equals(joinForm.getCheckPassword()))) {
+            session.setAttribute("message", "비밀번호를 다시 확인해주세요");
+            return "board/join";
+        } else{
+            Member member = new Member();
+            member.setId(joinForm.getId());
+            member.setPassword(joinForm.getPassword());
+            member.setName(joinForm.getName());
+            memberService.joinMember(member);
+            model.addAttribute("loginForm", loginForm);
+            session.setAttribute("message", "회원가입이 완료되었습니다");
             return "redirect:";
         }
 
+    }
+    @GetMapping
+    public String loginG(Model model) {
+        return "board/list";
     }
 }

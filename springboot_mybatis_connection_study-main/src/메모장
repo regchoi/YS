@@ -5,27 +5,19 @@ password varchar(255),
 name varchar(255),
 primary key(member_id)
 )
-
+--------------------------------------------------------------------------------------------------------
 insert into member(id,password,name) values('abc','abc','abc')
+--------------------------------------------------------------------------------------------------------
+create table board (
+board_id long auto_increment,
+category varchar(255),
+title varchar(255),
+content varchar(255),
+parentId long,
+createDate timestamp,
+update timestamp,
+member_id long,
+primary key(board_id),
+foreign key(member_id) references member(member_id)
+);
 
-<script>
-
-    $("#form").on("click", function () {
-    var checkid = document.getElementById("id");
-    var checkpw = document.getElementById("pw");
-
-    if(checkid.value == "") {
-        alert("아이디를 입력해주세요");
-        return false;
-    };
-
-    if(checkpw.value == "") {
-        alert("비밀번호를 입력해주세요");
-        return false;
-    };
-
-    document.getElementById("form").submit();
-
-    });
-
-</script>

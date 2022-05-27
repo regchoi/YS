@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+
+<body>
+
+    <div th:replace="layout/header::header"></div>
+
+
+        <form class="wrap" th:object="${loginForm}" method="post" th:action="@{/login}">
+            <div class="login">
+                <h2>Log-in</h2>
+                <div class="login_id">
+                    <h4>Id</h4>
+                    <input type="text" id="id" th:field="*{id}" placeholder="Id">
+                </div>
+                <div class="login_pw">
+                    <h4>Password</h4>
+                    <input type="password" id="pw" th:field="*{password}" placeholder="Password">
+                </div>
+                <div class="submit">
+                    <button type="submit" id="button">submit</button>
+                </div>
+            </div>
+        </form>
+
+
+
+    <div th:replace="layout/footer::footer"></div>
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:inline="javascript">
+      window.onload = () => {
+          var message = [[${session.message}]];
+          if(message !== null) {
+              swal(message);
+              fetch("/message_reset", {
+                method: "GET",
+              });
+          }
+      }
+    </script>
+
+
+
+</body>
+</html>

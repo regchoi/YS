@@ -20,8 +20,10 @@ public class MemberRepository {
         return memberMapper.findAll();
     }
 
-    public Member findById(String id) {
+    public List<Member> findById(String id) {
         return memberMapper.findById(id);
     }
+
+    public void join(Member member) { memberMapper.insert(member);}
 
 }

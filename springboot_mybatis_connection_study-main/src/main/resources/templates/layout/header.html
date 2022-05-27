@@ -13,14 +13,25 @@
                 </button>
                 <a href="/" class="navbar-brand" style="text-decoration:none;">
                     <img th:src="@{/images/spring_boot_gray.png}" class="img-rounded" style="display:inline-block;height:100%;margin-right:5px" />
-                    <span style="vertical-align:middle;">SpringBoot Community Web</span>
+                    <span style="vertical-align:middle;">간단한 프로젝트입니다</span>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" th:if=" ${session.login == null} ">
                     <li>
-                        <a href="/home/join">Join</a>
+                        <a href="/login">Login</a>
+                    </li>
+                    <li>
+                        <a href="/join">Join</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" th:if=" ${session.login == 'logined'} ">
+                    <li>
+                        <a href="/login">MyPage</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
