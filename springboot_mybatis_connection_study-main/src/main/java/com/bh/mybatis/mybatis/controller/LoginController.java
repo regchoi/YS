@@ -43,12 +43,8 @@ public class LoginController {
 
         if(!(member.getId().equals(loginForm.getId()))){
             session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
-            System.out.println("==============================================");
-            System.out.println(member.getId());
             return "/board/login";
         } else if(!(member.getPassword().equals(loginForm.getPassword()))){
-            System.out.println("==============================================");
-            System.out.println(member.getPassword());
             session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
             return "/board/login";
         } else {

@@ -1,0 +1,2 @@
+com/bh/mybatis/mybatis/MybatisApplicationTests.java
+ com.bh.mybatis.mybatis.MybatisApplicationTests

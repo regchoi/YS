@@ -20,4 +20,6 @@ public interface MemberMapper {
     @Insert("INSERT INTO member(id, password, name) VALUES(#{member.id}, #{member.password}, " +
             "#{member.name})")
     void insert(@Param("member") Member member);
+
+//    @Insert("INSERT INTO board(category, title, content, parentid, ")
 }

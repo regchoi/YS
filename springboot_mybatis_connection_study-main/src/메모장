@@ -21,3 +21,6 @@ primary key(board_id),
 foreign key(member_id) references member(member_id)
 );
 
+게시판 내용은 varchar가 아닌 text로 변경
+쿼리는 쿼리끼리 관리하기 편하게 xml로 수정하기, 자바에 X
+

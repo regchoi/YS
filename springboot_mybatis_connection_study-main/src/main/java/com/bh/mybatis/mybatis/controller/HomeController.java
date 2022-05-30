@@ -1,16 +1,20 @@
 package com.bh.mybatis.mybatis.controller;
 
+import com.bh.mybatis.mybatis.domain.Board;
 import com.bh.mybatis.mybatis.domain.Member;
 import com.bh.mybatis.mybatis.dto.JoinForm;
 import com.bh.mybatis.mybatis.dto.LoginForm;
 import com.bh.mybatis.mybatis.mapper.MemberMapper;
 import com.bh.mybatis.mybatis.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -65,4 +69,16 @@ public class HomeController {
     public String loginG(Model model) {
         return "board/list";
     }
+
+    @GetMapping("create")
+    public String boardCreate(Model model) {
+        return "smarteditor/newPost";
+    }
+
+//    @RequestMapping("savePost")
+//    public View savePost(HttpServletRequest request, Board board) {
+//        ModelMap model = new ModelMap();
+//        model.addAttribute("result", HttpStatus.OK);
+//
+//    }
 }
