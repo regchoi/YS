@@ -20,5 +20,5 @@ public class Board {
     private List<Member> memberList;
 
     private LocalDateTime createDate;
-    private LocalDateTime update;
+    private LocalDateTime modifiedDate;
 }

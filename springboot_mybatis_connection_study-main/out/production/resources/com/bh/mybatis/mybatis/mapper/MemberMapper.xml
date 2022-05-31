@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bh.mybatis.mybatis.mapper.MemberMapper">
+
+    <resultMap id="memberType" type="com.bh.mybatis.mybatis.domain.Member">
+        <id column="member_id" property="memberId"/>
+        <result column="id" property="id"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name" />
+    </resultMap>
+    
+    <insert id="joinMember" parameterType="com.bh.mybatis.mybatis.domain.Member">
+        INSERT INTO member (id, password, name)
+        VALUES (#{id}, #{password}, #{name});
+    </insert>
+
+    <select id="findMemberId" parameterType="java.lang.String" resultType="com.bh.mybatis.mybatis.domain.Member">
+        SELECT member_id, id, password, name
+         FROM member
+        WHERE id = #{id}
+    </select>
+</mapper>

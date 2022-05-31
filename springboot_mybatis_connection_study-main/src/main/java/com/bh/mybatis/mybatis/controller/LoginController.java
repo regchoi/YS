@@ -36,11 +36,13 @@ public class LoginController {
         HttpSession session = request.getSession();
         Member member = new Member();
         try{
-            member = memberService.findMember(loginForm.getId()).get(0);
+            member = memberService.findMemberId(loginForm.getId());
         } catch (Exception e){
             member.setId("ddd");
         }
-
+        System.out.println("====================================");
+        System.out.println(member.getId());
+        System.out.println("====================================");
         if(!(member.getId().equals(loginForm.getId()))){
             session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
             return "/board/login";

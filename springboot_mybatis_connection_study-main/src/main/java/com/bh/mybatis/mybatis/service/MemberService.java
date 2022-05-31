@@ -1,28 +1,23 @@
 package com.bh.mybatis.mybatis.service;
 
 import com.bh.mybatis.mybatis.domain.Member;
-import com.bh.mybatis.mybatis.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bh.mybatis.mybatis.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class MemberService {
-    private MemberRepository memberRepository;
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    private final MemberMapper memberMapper;
+
+    public Member findMemberId(String id) {
+        return memberMapper.findMemberId(id);
     }
 
-    public List<Member> getMember() {
-        return memberRepository.findAll();
-    }
-
-    public List<Member> findMember(String id) {
-        return memberRepository.findById(id);
-    }
-
-    public void joinMember(Member member) { memberRepository.join(member); }
+    public void joinMember(Member member) { memberMapper.joinMember(member); }
 }

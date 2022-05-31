@@ -23,19 +23,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/")
 public class HomeController {
 
-    private MemberService memberService;
+    private final MemberService memberService;
 
     @Autowired
     public HomeController(MemberService memberService) {
         this.memberService = memberService;
     }
-
-    @Autowired
-    private MemberMapper memberMapper;
-
-    public HomeController() {
-    }
-
 
     @GetMapping("join")
     public String joinG(Model model, JoinForm joinForm) {
@@ -47,7 +40,7 @@ public class HomeController {
     public String joinP(Model model, LoginForm loginForm, JoinForm joinForm, HttpServletRequest request) {
         HttpSession session = request.getSession();
 
-        if(!(memberService.findMember(joinForm.getId()).isEmpty())){
+        if(!(memberService.findMemberId(joinForm.getId()).getId().isBlank())){
             session.setAttribute("message", "이미 존재하는 아이디입니다");
             return "board/join";
         } else if(!(joinForm.getPassword().equals(joinForm.getCheckPassword()))) {
@@ -63,7 +56,6 @@ public class HomeController {
             session.setAttribute("message", "회원가입이 완료되었습니다");
             return "redirect:";
         }
-
     }
     @GetMapping
     public String loginG(Model model) {

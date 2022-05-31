@@ -5,21 +5,15 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
 public interface MemberMapper {
 
-    @Select("SELECT * FROM MEMBER")
-    List<Member> findAll();
+    void joinMember (Member member);
 
-    @Select("SELECT * FROM MEMBER WHERE id=#{id}")
-    List<Member> findById(@Param("id") String id);
+    Member findMemberId (String id);
 
-    @Insert("INSERT INTO member(id, password, name) VALUES(#{member.id}, #{member.password}, " +
-            "#{member.name})")
-    void insert(@Param("member") Member member);
-
-//    @Insert("INSERT INTO board(category, title, content, parentid, ")
 }
