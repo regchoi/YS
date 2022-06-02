@@ -8,18 +8,31 @@ primary key(member_id)
 --------------------------------------------------------------------------------------------------------
 insert into member(id,password,name) values('abc','abc','abc')
 --------------------------------------------------------------------------------------------------------
-create table board (
+create table mainboard (
 board_id long auto_increment,
 category varchar(255),
 title varchar(255),
-content varchar(255),
-parentId long,
+content text,
 createDate timestamp,
 update timestamp,
 member_id long,
 primary key(board_id),
 foreign key(member_id) references member(member_id)
 );
+---------------------------------------------------------------------------------------------------------
+create table sideboard (
+sideboard_id int auto_increment,
+category varchar(255),
+title varchar(255),
+content text,
+createDate timestamp,
+modifiedDate timestamp,
+parentboard_id int,
+member_id int,
+primary key(sideboard_id),
+foreign key(member_id) references member(member_id)
+);
+
 
 게시판 내용은 varchar가 아닌 text로 변경
 쿼리는 쿼리끼리 관리하기 편하게 xml로 수정하기, 자바에 X

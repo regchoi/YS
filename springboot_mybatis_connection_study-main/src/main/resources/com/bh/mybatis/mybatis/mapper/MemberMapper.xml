@@ -7,6 +7,14 @@
         <result column="id" property="id"/>
         <result column="password" property="password"/>
         <result column="name" property="name" />
+<!--        <collection property="boardType" javaType="com.bh.mybatis.mybatis.domain.MainBoard">-->
+<!--            <id column="mainboard_id" property="mainboardId"/>-->
+<!--            <result column="category" property="cateogyr"/>-->
+<!--            <result column="title" property="title"/>-->
+<!--            <result column="content" property="content"/>-->
+<!--            <result column="createDate" property="createDate"/>-->
+<!--            <result column="modifiedDate" property="modifiedDate"/>-->
+<!--        </collection>-->
     </resultMap>
     
     <insert id="joinMember" parameterType="com.bh.mybatis.mybatis.domain.Member">
@@ -17,6 +25,13 @@
     <select id="findMemberId" parameterType="java.lang.String" resultType="com.bh.mybatis.mybatis.domain.Member">
         SELECT member_id, id, password, name
          FROM member
-        WHERE id = #{id}
+        WHERE id = #{id};
     </select>
+
+<!--    <insert id="createMainBoard" parameterType="com.bh.mybatis.mybatis.domain.MainBoard">-->
+<!--        INSERT INTO mainboard (category, title, content, member_id, createDate)-->
+<!--        VALUES (#{category}, #{title}, #{content}, #{memberId}, #{createDate});-->
+<!--    </insert>-->
+
+
 </mapper>

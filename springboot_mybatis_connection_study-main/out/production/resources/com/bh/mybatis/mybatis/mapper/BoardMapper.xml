@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bh.mybatis.mybatis.mapper.BoardMapper">
+
+    <insert id="createMainBoard" parameterType="com.bh.mybatis.mybatis.domain.MainBoard">
+        INSERT INTO mainboard (category, title, content, member_id, createDate)
+        VALUES (#{category}, #{title}, #{content}, #{memberId}, #{createDate});
+    </insert>
+
+
+</mapper>

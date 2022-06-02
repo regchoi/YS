@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/")
@@ -33,27 +33,7 @@ public class LoginController {
     }
     @PostMapping("login")
     public String loginP(LoginForm loginForm, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Member member = new Member();
-        try{
-            member = memberService.findMemberId(loginForm.getId());
-        } catch (Exception e){
-            member.setId("ddd");
-        }
-        System.out.println("====================================");
-        System.out.println(member.getId());
-        System.out.println("====================================");
-        if(!(member.getId().equals(loginForm.getId()))){
-            session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
-            return "/board/login";
-        } else if(!(member.getPassword().equals(loginForm.getPassword()))){
-            session.setAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다");
-            return "/board/login";
-        } else {
-            session.setAttribute("login", "logined");
-            session.setAttribute("message", "로그인 되었습니다.");
-            return "redirect:";
-        }
+        return memberService.loginMember(loginForm, request);
     }
 
 

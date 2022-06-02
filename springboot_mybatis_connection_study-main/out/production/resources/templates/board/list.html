@@ -13,7 +13,7 @@
         <div class="page-header">
             <h1>게시글 목록</h1>
         </div>
-        <div class="pull-right" style="width:100px;margin:10px 0;">
+        <div class="pull-right" style="width:100px;margin:10px 0;" th:if=" ${session.login == 'logined'} ">
             <a href="/create" class="btn btn-primary btn-block">등록</a>
         </div>
         <br/><br/><br/>

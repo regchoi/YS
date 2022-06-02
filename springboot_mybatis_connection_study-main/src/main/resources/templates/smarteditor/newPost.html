@@ -9,21 +9,22 @@
 <body>
 
     <h3>Naver Smart Editor 2.0</h3>
-    <form action="insertStudentInfoForm" method="post">
+    <form action="/savePost" method="post">
         <div id="smarteditor">
+            제목: <input type="text" name="title" id="title"/>
             <textarea name="editorTxt" id="editorTxt"
                       rows="20" cols="10"
                       placeholder="내용을 입력해주세요"
                       style="width: 500px"></textarea>
         </div>
-        <input type="button" value="등록" onclick="submitPost();"/>
+        <input type="button" value="등록" onclick="savePost();"/>
         <input type="button" value="돌아가기" onclick="location.href='/'"/>
     </form>
     <script>
     let oEditors = []
 
     smartEditor = function() {
-      console.log("Naver SmartEditor")
+      console.log("Naver <<<SmartEdit></SmartEdit></SmartEdit></SmartEdit>or")
       nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
         elPlaceHolder: "editorTxt",
@@ -40,18 +41,35 @@
 
   </script>
 <script>
-            submitPost = function() {
-  oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
-  let content = document.getElementById("editorTxt").value
+  savePost = function() {
+      oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+      let content = document.getElementById("editorTxt").value
 
-  if(content == '') {
-    alert("내용을 입력해주세요.")
-    oEditors.getById["editorTxt"].exec("FOCUS")
-    return
-  } else {
-    console.log(content)
-  }
-}
+      if(content == '') {
+        alert("내용을 입력해주세요.")
+        oEditors.getById["editorTxt"].exec("FOCUS")
+        return
+      } else {
+
+        let mainBoard = {
+          title: $("#title")[0].value
+          , content: content
+        }
+
+        $.ajax({
+          url: "/savePost"
+          , data: mainBoard
+          , success: function(data) {
+            console.log('success')
+            alert('저장하였습니다.')
+          }
+          , error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+            alert('오류가 발생하였습니다.')
+          }
+        })
+      }
+    }
 </script>
 
 </body>

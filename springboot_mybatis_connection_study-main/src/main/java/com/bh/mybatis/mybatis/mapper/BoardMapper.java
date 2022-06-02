@@ -1,12 +1,13 @@
 package com.bh.mybatis.mybatis.mapper;
 
-import com.bh.mybatis.mybatis.domain.Board;
-import org.springframework.stereotype.Repository;
+import com.bh.mybatis.mybatis.domain.MainBoard;
 
 import java.util.List;
 
 public interface BoardMapper {
+    void createMainBoard(MainBoard mainBoard);
+
     int boardCount();
 
-    List<Board> getList();
+    List<MainBoard> getList();
 }
