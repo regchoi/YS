@@ -2,10 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bh.mybatis.mybatis.mapper.BoardMapper">
 
-    <insert id="createMainBoard" parameterType="com.bh.mybatis.mybatis.domain.MainBoard">
-        INSERT INTO mainboard (category, title, content, member_id, createDate)
-        VALUES (#{category}, #{title}, #{content}, #{memberId}, #{createDate});
+    <insert id="createMainBoard" parameterType="MainBoard">
+        INSERT INTO mainboard (category, title, content, member_id)
+        VALUES (#{category}, #{title}, #{content}, #{memberId});
     </insert>
 
+    <update id="editMainBoard" parameterType="MainBoard" >
+        UPDATE mainboard
+        SET title = #{title},
+            content = #{content},
+            modifiedDate = #{modifiedDate}
+        WHERE mainboard_id = #{mainboardId}
+    </update>
+
+
+    <select id="allMainBoard" resultType="MainBoard">
+        SELECT mainboard_id mainboardId, category, title, content, createDate, modifiedDate, member_id memberId
+        FROM mainboard;
+    </select>
+
+    <select id="selectMainBoardById" parameterType="int" resultType="MainBoard">
+        SELECT mainboard_id mainboardId, title, content, member_id memberId
+        FROM mainboard
+        WHERE mainboard_id = #{mainboard_id};
+    </select>
+
+    <delete id="deleteMainBoard" parameterType="int">
+        DELETE FROM mainboard where mainboard_id = #{mainboard_id};
+    </delete>
+
+
+
+
+    <insert id="createSideBoard" parameterType="SideBoard">
+        INSERT INTO sideboard (category, content, mainboard_id, member_id)
+        VALUES (#{category}, #{content}, #{mainboardId}, #{memberId});
+    </insert>
+
+    <update id="editSideBoard" parameterType="SideBoard" >
+        UPDATE sideboard
+        SET content = #{content},
+            modifiedDate = #{modifiedDate}
+        WHERE sideboard_id = #{sideboardId}
+    </update>
+
+    <select id="allSideBoard" resultType="SideBoard">
+        SELECT *
+        FROM sideboard;
+    </select>
+
+    <select id="selectSideBoardById" parameterType="int" resultType="SideBoard">
+        SELECT mainboard_id mainboardId, content, sideboard_id sideboardId, createDate, modifiedDate, member_id memberId
+        FROM sideboard
+        WHERE mainboard_id = #{mainboard_id};
+    </select>
+
+    <select id="selectSideBoardByIdOne" parameterType="int" resultType="SideBoard">
+        SELECT mainboard_id mainboardId, content, sideboard_id sideboardId, createDate, modifiedDate, member_id memberId
+        FROM sideboard
+        WHERE sideboard_id = #{sideboard_id};
+    </select>
+
+    <delete id="deleteSideBoard" parameterType="int">
+        DELETE FROM sideboard where sideboard_id = #{sideboard_id};
+    </delete>
 
 </mapper>

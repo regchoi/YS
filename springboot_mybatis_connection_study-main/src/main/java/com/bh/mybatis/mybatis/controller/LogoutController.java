@@ -19,6 +19,7 @@ public class LogoutController {
         session.setAttribute("login", null);
         session.setAttribute("member", null);
         session.setAttribute("memberType", null);
+        session.setAttribute("id", null);
         session.setAttribute("message", "로그아웃");
         return "redirect:";
     }

@@ -1,0 +1,12 @@
+package com.bh.mybatis.mybatis.dto;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class IdForm {
+    private int id;
+}

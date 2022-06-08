@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+    <div class="container">
+<h1>asdfadsfasfsafsa</h1>
+    <form action="@{}">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-8">내용</th>
+                <th class="col-md-4"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="board : ${sideboard}">
+                <td th:text="${board.getContent()}"></td>
+                <td th:if=" ${board.memberId == session.id} "><a th:href=" @{'/board/side/delete/' + ${board.SideboardId}} "> 삭제 </a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="submit">
+            <button type="submit">채택</button>
+            <button type="button" th:onclick="'location.href=\''+ @{'/board/' + ${mainboardId}} + '\''">돌아가기</button>
+        </div>
+    </form>
+
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:inline="javascript">
+      window.onload = () => {
+          var message = [[${session.message}]];
+          if(message !== null) {
+              swal(message);
+              fetch("/message_reset", {
+                method: "GET",
+              });
+          }
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <div class="container">
+        <div class="pull-right" th:if=" ${session.login == 'logined' && mainboard.memberId != session.id} ">
+            <a th:href="@{'create/sideBoard/' + ${mainboard.mainboardId}}" class="btn btn-primary btn-block">답변하기</a>
+        </div>
+        <div class="pull-right" th:if=" ${mainboard.memberId == session.id} ">
+            <a th:href="@{'choose/sideBoard/' + ${mainboard.mainboardId}}" class="btn btn-primary btn-block">채택하기</a>
+        </div>
+        <div>
+            <br/><br/><br/>
+            <h1 th:text="${mainboard.getTitle()}"></h1>
+            <p th:text="${mainboard.getContent()}"></p>
+        </div>
+
+        <div id="mainHide">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-12"></th>
+                </tr>
+                </thead>
+            </table>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-5">내용</th>
+                    <th class="col-md-2">작성 날짜</th>
+                    <th class="col-md-2">수정 날짜</th>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-2"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board : ${sideboard}">
+                    <td th:text="${board.getContent()}"></td>
+                    <td th:text="${board.createDate} ? ${#temporals.format(board.createDate,'yyyy-MM-dd HH:mm')} : ${board.createDate}"></td>
+                    <td th:text="${board.modifiedDate} ? ${#temporals.format(board.modifiedDate,'yyyy-MM-dd HH:mm')} : ${board.modifiedDate}"></td>
+                    <td th:if=" ${board.memberId == session.id} "><a th:href=" @{'/board/side/edit/' + ${board.SideboardId}} "> 수정 </a></td>
+                    <td th:if=" ${board.memberId == session.id} "><a th:href=" @{'/board/side/delete/' + ${board.SideboardId}} "> 삭제 </a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+
+    </div>
+
+    <div th:replace="layout/footer::footer"></div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:inline="javascript">
+      window.onload = () => {
+          var message = [[${session.message}]];
+          if(message !== null) {
+              swal(message);
+              fetch("/message_reset", {
+                method: "GET",
+              });
+          }
+      }
+    </script>
+</body>
+</html>

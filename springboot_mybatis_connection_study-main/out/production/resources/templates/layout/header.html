@@ -27,6 +27,9 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" th:if=" ${session.login == 'logined'} ">
+                    <li th:if=" ${session.memberType == 'admin'} ">
+                        <a href="/login">admin</a>
+                    </li>
                     <li>
                         <a href="/login">MyPage</a>
                     </li>

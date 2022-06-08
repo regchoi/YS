@@ -37,3 +37,73 @@ foreign key(member_id) references member(member_id)
 게시판 내용은 varchar가 아닌 text로 변경
 쿼리는 쿼리끼리 관리하기 편하게 xml로 수정하기, 자바에 X
 
+=====================================================================================================
+use qna;
+
+drop table mainboard;
+create table member (
+member_id int auto_increment,
+id varchar(255),
+password varchar(255),
+name varchar(255),
+primary key(member_id)
+);
+
+insert into member(id,password,name) values('admin','admin','admin');
+
+create table mainboard (
+mainboard_id int auto_increment,
+category varchar(255),
+title varchar(255),
+content text,
+createDate timestamp default now(),
+modifiedDate timestamp default now(),
+member_id int,
+sideboard_id int,
+reply_id int,
+view int,
+primary key(mainboard_id),
+foreign key(member_id) references member(member_id),
+foreign key(sideboard_id) references sideboard(sideboard_id),
+foreign key(reply_id) references reply(reply_id)
+);
+
+create table sideboard (
+sideboard_id int auto_increment,
+category varchar(255),
+content text,
+createDate timestamp default now(),
+modifiedDate timestamp default now(),
+reply_id int,
+mainboard_id int,
+member_id int,
+primary key(sideboard_id),
+foreign key(member_id) references member(member_id),
+foreign key(mainboard_id) references mainboard(mainboard_id),
+foreign key(reply_id) references reply(reply_id)
+);
+
+create table reply (
+reply_id int auto_increment,
+content text,
+createDate timestamp default now(),
+modifiedDate timestamp default now(),
+member_id int,
+mainboard_id int,
+sideboard_id int,
+primary key(reply_id),
+foreign key(member_id) references member(member_id),
+foreign key(mainboard_id) references mainboard(mainboard_id),
+foreign key(sideboard_id) references sideboard(sideboard_id)
+);
+
+
+
+
+select * from member;
+
+select * from mainboard;
+
+SELECT member_id, id, password, name
+         FROM member
+        WHERE id = 'qqq';

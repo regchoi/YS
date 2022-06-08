@@ -8,11 +8,24 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class SideBoard {
     private int sideboardId;
-    private String title;
+    private String category;
     private String content;
-    private int parentboardId;
+    private int mainboardId;
     private int memberId;
 
     private LocalDateTime createDate;
     private LocalDateTime modifiedDate;
+
+    @Override
+    public String   toString() {
+        return "SideBoard{" +
+                "sideboardId=" + sideboardId +
+                ", category='" + category + '\'' +
+                ", content='" + content + '\'' +
+                ", mainboardId=" + mainboardId +
+                ", memberId=" + memberId +
+                ", createDate=" + createDate +
+                ", modifiedDate=" + modifiedDate +
+                '}';
+    }
 }
